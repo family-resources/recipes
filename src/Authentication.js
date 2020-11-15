@@ -4,6 +4,61 @@ import { API_KEY, CLIENT_ID, RECIPES_SHEET_ID } from "./constants";
 export function Authentication({ loaded, setRecipes }): React.Node {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
+  /**
+   * Print the contents of the spreadsheet
+   * https://docs.google.com/spreadsheets/d/1mlCIY1G-CW1EfNddv7tjEVJoXCz6TyXLcNfqLdBRkzU/edit#gid=1825319816
+   */
+  const getRecipes = React.useCallback(() => {
+    global.gapi.client.sheets.spreadsheets.values
+      .get({
+        spreadsheetId: RECIPES_SHEET_ID,
+        range: "Recipes!A2:L92",
+      })
+      .then(
+        (response) => {
+          const rawRecipes = response.result.values;
+          if (rawRecipes.length > 0) {
+            const recipesNormalized = rawRecipes.map((r) => {
+              const [
+                name,
+                person,
+                raw_cat,
+                raw_recipe,
+                ingreds,
+                instructions,
+                story,
+                source,
+                cooking_time,
+                preheat_temp,
+                servings,
+                photos,
+              ] = r;
+              return {
+                name,
+                person,
+                raw_cat,
+                raw_recipe,
+                ingreds,
+                instructions,
+                story,
+                source,
+                cooking_time,
+                preheat_temp,
+                servings,
+                photos,
+              };
+            });
+            setRecipes(recipesNormalized);
+          } else {
+            console.error("No Data Found");
+          }
+        },
+        function (response) {
+          console.error("Error: " + response.result.error.message);
+        }
+      );
+  }, [setRecipes]);
+
   React.useEffect(() => {
     const { gapi } = global;
     if (loaded) {
@@ -45,7 +100,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
         });
       }
     }
-  }, [loaded]);
+  }, [loaded, getRecipes]);
 
   function handleAuthClick(event) {
     global.gapi.auth2.getAuthInstance().signIn();
@@ -54,32 +109,6 @@ export function Authentication({ loaded, setRecipes }): React.Node {
   function handleSignoutClick(event) {
     global.gapi.auth2.getAuthInstance().signOut();
   }
-
-  /**
-   * Print the contents of the spreadsheet
-   * https://docs.google.com/spreadsheets/d/1mlCIY1G-CW1EfNddv7tjEVJoXCz6TyXLcNfqLdBRkzU/edit#gid=1825319816
-   */
-  function getRecipes() {
-    global.gapi.client.sheets.spreadsheets.values
-      .get({
-        spreadsheetId: RECIPES_SHEET_ID,
-        range: "Recipes!A2:L92",
-      })
-      .then(
-        (response) => {
-          const recipes = response.result.values;
-          if (recipes.length > 0) {
-            setRecipes(recipes);
-          } else {
-            console.error("No Data Found");
-          }
-        },
-        function (response) {
-          console.error("Error: " + response.result.error.message);
-        }
-      );
-  }
-
   return (
     <div>
       {isLoggedIn ? (

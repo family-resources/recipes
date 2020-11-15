@@ -2,43 +2,17 @@ import * as React from "react";
 import { Recipe } from "./Recipe";
 
 export function Recipes(props) {
-  const { recipes } = props;
+  const { recipes, filters } = props;
 
   return recipes ? (
-    <div class="recipes_container">
-      {recipes.map((recipe) => {
-        const [
-          name,
-          person,
-          raw_cat,
-          raw_recipe,
-          ingreds,
-          instructions,
-          story,
-          source,
-          cooking_time,
-          preheat_temp,
-          servings,
-          photos,
-        ] = recipe;
-        return (
-          <Recipe
-            {...{
-              name,
-              person,
-              raw_cat,
-              raw_recipe,
-              ingreds,
-              instructions,
-              story,
-              source,
-              cooking_time,
-              preheat_temp,
-              servings,
-              photos,
-            }}
-          />
-        );
+    <div className="recipes_container">
+      {recipes.map((recipe, index) => {
+        const passesFilters = filters.every(({ key, value }) => {
+          return recipe[key] === value;
+        });
+        return passesFilters ? (
+          <Recipe key={`${recipe.name} ${index}`} {...recipe} />
+        ) : null;
       })}
     </div>
   ) : null;
