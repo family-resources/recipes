@@ -1,5 +1,5 @@
 .recipes_container {
-  padding: 1rem 20%
+  padding: 1rem 20%;
 }
 
 .recipe_container {
@@ -20,6 +20,31 @@
   font-style: italic;
 }
 
+.controlss_container {
+  padding: 1rem 20%;
+  display: flex;
+}
+
 .filters_container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter_container {
+  margin: 0 1rem;
+}
+
+.clear_search_button {
+  position: relative;
+  right: 20px;
+  top:1px;
+  font-style: normal;
+  font-size: 1.2em;
+  user-select: none;
+  cursor: pointer;
+}
+
+.clear_search_button:hover {
+  color: rgba(0,0,0, 0.5)
 }

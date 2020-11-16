@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Filter } from "./Filter";
 
-const FILTERABLE_KEYS = ["person", "raw_cat", "servings"];
+const FILTERABLE_KEYS = ["person", "raw_cat"];
 
 export function Filters(props) {
   const { recipes, setFilters, filters } = props;

@@ -4,7 +4,7 @@ import { getKeyPluralDisplayName } from "./utils";
 export function Filter(props) {
   const { filterKey, currentValue, allValues, setKeyFilter } = props;
   return (
-    <div className={`${filterKey}_filter`}>
+    <div className={`filter_container ${filterKey}_filter`}>
       <select
         onChange={(e) => {
           const options = e.target.options;

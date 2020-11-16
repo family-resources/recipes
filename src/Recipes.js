@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Recipe } from "./Recipe";
+import { getSearchStringForRecipe } from "./utils";
 
 export function Recipes(props) {
-  const { recipes, filters } = props;
+  const { recipes, filters, searchTerm } = props;
 
   return recipes ? (
     <div className="recipes_container">
@@ -10,7 +11,12 @@ export function Recipes(props) {
         const passesFilters = filters.every(({ key, value }) => {
           return recipe[key] === value;
         });
-        return passesFilters ? (
+        const passesSearch =
+          searchTerm === "" ||
+          getSearchStringForRecipe(recipe).search(
+            new RegExp(searchTerm, "i")
+          ) >= 0;
+        return passesFilters && passesSearch ? (
           <Recipe key={`${recipe.name} ${index}`} {...recipe} />
         ) : null;
       })}

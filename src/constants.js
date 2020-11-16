@@ -33,3 +33,16 @@ export const PLURAL_DISPLAY_NAMES_BY_KEY = {
   servings: "servings",
   photos: "photos",
 };
+
+export const SEARCHABLE_KEYS = [
+  "name",
+  "person",
+  "raw_cat",
+  "ingreds",
+  "instructions",
+  "story",
+  "source",
+  "cooking_time",
+  "preheat_temp",
+  "servings",
+];
