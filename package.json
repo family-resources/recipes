@@ -2,7 +2,7 @@
   "name": "recipes-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://family-resources.github.io/recipes/",
+  "homepage": "https://family-resources.github.io/recipes",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -15,9 +15,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && rm -rf docs && mv build docs",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d docs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
