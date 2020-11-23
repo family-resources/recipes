@@ -110,11 +110,19 @@ export function Authentication({ loaded, setRecipes }): React.Node {
     global.gapi.auth2.getAuthInstance().signOut();
   }
   return (
-    <div>
+    <div
+      className={`auth_container ${
+        isLoggedIn ? "logged_in" : "not_authorized"
+      }`}
+    >
       {isLoggedIn ? (
-        <button onClick={handleSignoutClick}>LOGOUT</button>
+        <button className="logout_button" onClick={handleSignoutClick}>
+          LOGOUT
+        </button>
       ) : (
-        <button onClick={handleAuthClick}>AUTHORIZE WITH GOOGLE ACCOUNT</button>
+        <button className="authorize_button" onClick={handleAuthClick}>
+          AUTHORIZE WITH GOOGLE ACCOUNT
+        </button>
       )}
     </div>
   );

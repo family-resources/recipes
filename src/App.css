@@ -1,3 +1,21 @@
+.app_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth_container {
+  width: 100%;
+  display: flex;
+}
+
+.auth_container.logged_in {
+  justify-content: flex-end;
+}
+
+.auth_container.not_authorized{
+  justify-content: center;
+}
+
 .recipes_container {
   padding: 1rem 20%;
 }
@@ -9,6 +27,27 @@
   border-radius: 1rem;
   margin: 1rem;
   padding: 1rem;
+}
+
+.print_recipe_button {
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.category_header {
+  text-transform: capitalize;
+}
+
+.print_only {
+  display: none;
+}
+
+@media print {
+  .print_only {
+      display: block;
+  }
 }
 
 .recipe_name {
@@ -35,10 +74,25 @@
   margin: 0 1rem;
 }
 
+.search_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+
+.search_container > input {
+  width: 16rem;
+  height: 1.5rem;
+}
+
+.search_container > input:focus {
+  outline-offset: 0; /*prevent focus jitter in chrome*/
+}
+
 .clear_search_button {
-  position: relative;
-  right: 20px;
-  top:1px;
+  position: absolute;
+  margin: 0 0 4px 16rem;
   font-style: normal;
   font-size: 1.2em;
   user-select: none;

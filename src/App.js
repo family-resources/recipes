@@ -15,7 +15,7 @@ function App() {
   const [searchTerm, setSearchTerm] = React.useState("");
 
   return (
-    <div className="App">
+    <div className="app_container">
       <Authentication loaded={gapiLoaded} setRecipes={setRecipes} />
       {gapiError && <p>gapiError</p>}
       {recipes && (
