@@ -59,6 +59,12 @@
   font-style: italic;
 }
 
+.recipe_photo_thumbnail {
+  max-width: 20rem;
+  height: auto;
+
+}
+
 .controlss_container {
   padding: 1rem 20%;
   display: flex;

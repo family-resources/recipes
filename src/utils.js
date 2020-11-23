@@ -19,3 +19,9 @@ export function getSearchStringForRecipe(recipe) {
     ""
   );
 }
+
+export function formatPhotoLink(raw_uri) {
+  const [path, idParam] = raw_uri.split("open?");
+
+  return `${path}uc?export=view&${idParam}`;
+}

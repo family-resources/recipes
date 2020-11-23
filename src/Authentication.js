@@ -20,18 +20,20 @@ export function Authentication({ loaded, setRecipes }): React.Node {
           if (rawRecipes.length > 0) {
             const recipesNormalized = rawRecipes.map((r) => {
               const [
-                name,
+                timestamp,
                 person,
+                name,
                 raw_cat,
-                raw_recipe,
+                alt_cat,
                 ingreds,
                 instructions,
                 story,
                 source,
                 cooking_time,
-                preheat_temp,
                 servings,
                 photos,
+                preheat_temp,
+                raw_recipe,
               ] = r;
               return {
                 name,
@@ -46,6 +48,8 @@ export function Authentication({ loaded, setRecipes }): React.Node {
                 preheat_temp,
                 servings,
                 photos,
+                timestamp,
+                alt_cat,
               };
             });
             setRecipes(recipesNormalized);

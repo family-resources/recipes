@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useReactToPrint } from "react-to-print";
 import { DISPLAY_NAMES_BY_KEY } from "./constants";
+import { formatPhotoLink } from "./utils";
 
 const PRINT_ONLY_PROPS = [
   "story",
@@ -12,6 +13,7 @@ const PRINT_ONLY_PROPS = [
 export function Recipe(props) {
   const { name, person, ingreds, instructions, photos } = props;
 
+  console.log("TODO: unhandled photos", photos);
   const printElRef = React.useRef();
   const handlePrint = useReactToPrint({
     content: () => printElRef.current,
@@ -62,7 +64,16 @@ export function Recipe(props) {
             <p key={`${index}${i}`}>{i}</p>
           ))}
       </div>
-      {photos && photos.map((p) => <img src={p} alt={name} />)}
+      {photos &&
+        photos
+          .split(", ")
+          .map((p, i) => (
+            <img
+              className="recipe_photo_thumbnail"
+              src={formatPhotoLink(p)}
+              alt={`${name}${i}`}
+            />
+          ))}
       <div className="print_only">
         {PRINT_ONLY_PROPS.map((p) =>
           props[p] ? (
