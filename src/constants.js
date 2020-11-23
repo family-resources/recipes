@@ -53,10 +53,10 @@ export const SEARCHABLE_KEYS = [
 // color pallete
 
 /* Array */
-const COLOR_HEXES = ["dde8b9", "e8d2ae", "d7b29d", "cb8589", "796465"];
+export const COLOR_HEXES = ["dde8b9", "e8d2ae", "d7b29d", "cb8589", "796465"];
 
 /* Object */
-const COLOR_MAP = {
+export const COLOR_MAP = {
   "Pale Spring Bud": "dde8b9",
   Wheat: "e8d2ae",
   Tumbleweed: "d7b29d",
@@ -65,7 +65,7 @@ const COLOR_MAP = {
 };
 
 /* Extended Array */
-const COLOR_MANIFEST = [
+export const COLOR_MANIFEST = [
   {
     name: "Pale Spring Bud",
     hex: "dde8b9",
