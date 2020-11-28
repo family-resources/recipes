@@ -12,7 +12,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
     global.gapi.client.sheets.spreadsheets.values
       .get({
         spreadsheetId: RECIPES_SHEET_ID,
-        range: "Recipes!A2:L92",
+        range: "Recipes!A2:L",
       })
       .then(
         (response) => {

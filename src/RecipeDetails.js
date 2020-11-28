@@ -79,14 +79,15 @@ export function RecipeDetails(props) {
             {DISPLAY_NAMES_BY_KEY.ingreds}
           </strong>
           <ul className="ingreds_list">
-            {ingreds
-              .split("\n")
-              .filter((i) => i)
-              .map((i, index) => (
-                <li className="ingred_item" key={`${index}${i}`}>
-                  {i}
-                </li>
-              ))}
+            {ingreds &&
+              ingreds
+                .split("\n")
+                .filter((i) => i)
+                .map((i, index) => (
+                  <li className="ingred_item" key={`${index}${i}`}>
+                    {i}
+                  </li>
+                ))}
           </ul>
         </div>
         <div className="instructions_wrapper">
@@ -94,12 +95,11 @@ export function RecipeDetails(props) {
             {DISPLAY_NAMES_BY_KEY.instructions}
           </strong>
           <div>
-            {instructions
-              .split("\n")
-              .filter((i) => i)
-              .map((i, index) => (
-                <p key={`${index}${i}`}>{i}</p>
-              ))}
+            {instructions &&
+              instructions
+                .split("\n")
+                .filter((i) => i)
+                .map((i, index) => <p key={`${index}${i}`}>{i}</p>)}
           </div>
         </div>
       </div>
