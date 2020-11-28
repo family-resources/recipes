@@ -35,7 +35,7 @@ export function RecipeDetails(props) {
         >
           <svg
             id="_x31__px"
-            enable-background="new 0 0 24 24"
+            enableBackground="new 0 0 24 24"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -50,6 +50,7 @@ export function RecipeDetails(props) {
       </div>
       {photoUris.map((p, i) => (
         <img
+          key={i}
           className="recipe_photo_detail"
           src={formatPhotoLink(p)}
           alt={`${name}${i}`}
@@ -59,14 +60,16 @@ export function RecipeDetails(props) {
         <h3 className="recipe_name">{name}</h3>
         <p className="recipe_person">{`Contributed By: ${person}`}</p>
         <table className="recipe_metadata">
-          {METADATA_PROPS.map((p) =>
-            props[p] ? (
-              <tr className="metadata_item">
-                <td className="metadata_key">{DISPLAY_NAMES_BY_KEY[p]}</td>
-                <td>{props[p]}</td>
-              </tr>
-            ) : null
-          )}
+          <tbody>
+            {METADATA_PROPS.map((p) =>
+              props[p] ? (
+                <tr key={p} className="metadata_item">
+                  <td className="metadata_key">{DISPLAY_NAMES_BY_KEY[p]}</td>
+                  <td>{props[p]}</td>
+                </tr>
+              ) : null
+            )}
+          </tbody>
         </table>
         {story && <p className="recipe_story">{story}</p>}
       </div>
