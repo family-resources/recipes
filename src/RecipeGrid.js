@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Recipe } from "./Recipe";
+import { RecipeTile } from "./RecipeTile";
 import { getSearchStringForRecipe } from "./utils";
 
-export function Recipes(props) {
-  const { recipes, filters, searchTerm } = props;
+export function RecipeGrid(props) {
+  const { recipes, filters, searchTerm, setFocusedRecipe } = props;
 
-  return recipes ? (
+  return (
     <div className="recipes_container">
       {recipes.map((recipe, index) => {
         const passesFilters = filters.every(({ key, value }) => {
@@ -17,9 +17,13 @@ export function Recipes(props) {
             new RegExp(searchTerm, "i")
           ) >= 0;
         return passesFilters && passesSearch ? (
-          <Recipe key={`${recipe.name} ${index}`} {...recipe} />
+          <RecipeTile
+            key={`${recipe.name} ${index}`}
+            setFocus={setFocusedRecipe}
+            {...recipe}
+          />
         ) : null;
       })}
     </div>
-  ) : null;
+  );
 }

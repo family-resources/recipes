@@ -21,7 +21,18 @@ export function getSearchStringForRecipe(recipe) {
 }
 
 export function formatPhotoLink(raw_uri) {
-  const [path, idParam] = raw_uri.split("open?");
+  // if (raw_uri.includes("open?")) {
+  //   const [path, idParam] = raw_uri.split("open?");
+  //   return `${path}uc?export=view&${idParam}`;
+  // } else {
+  //   const [path, idParam] = raw_uri.split("view?");
+  //   return `${path}uc?export=view&${idParam}`;
+  // }
+  const match = raw_uri.match(
+    new RegExp("(https://drive.google.com/)file/d/(.+)/.*")
+  );
 
-  return `${path}uc?export=view&${idParam}`;
+  console.log(raw_uri, match);
+
+  return match && `${match[1]}uc?export=view&id=${match[2]}`;
 }
