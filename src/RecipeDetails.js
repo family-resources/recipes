@@ -13,6 +13,7 @@ export function RecipeDetails(props) {
     photos,
     story,
     clearFocus,
+    id,
   } = props;
 
   const photoUris = photos ? photos.split(", ") : [];
@@ -103,6 +104,7 @@ export function RecipeDetails(props) {
           </div>
         </div>
       </div>
+      <footer>{id}</footer>
     </div>
   );
 }

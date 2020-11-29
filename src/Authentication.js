@@ -12,7 +12,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
     global.gapi.client.sheets.spreadsheets.values
       .get({
         spreadsheetId: RECIPES_SHEET_ID,
-        range: "Recipes!A2:L",
+        range: "Recipes!A2:O",
       })
       .then(
         (response) => {
@@ -34,6 +34,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
                 photos,
                 preheat_temp,
                 raw_recipe,
+                id,
               ] = r;
               return {
                 name,
@@ -50,6 +51,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
                 photos,
                 timestamp,
                 alt_cat,
+                id,
               };
             });
             setRecipes(recipesNormalized);

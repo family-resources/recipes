@@ -7,7 +7,7 @@ export function RecipeGrid(props) {
 
   return (
     <div className="recipes_container">
-      {recipes.map((recipe, index) => {
+      {recipes.map((recipe) => {
         const passesFilters = filters.every(({ key, value }) => {
           return recipe[key] === value;
         });
@@ -17,11 +17,7 @@ export function RecipeGrid(props) {
             new RegExp(searchTerm, "i")
           ) >= 0;
         return passesFilters && passesSearch ? (
-          <RecipeTile
-            key={`${recipe.name} ${index}`}
-            setFocus={setFocusedRecipe}
-            {...recipe}
-          />
+          <RecipeTile key={recipe.id} setFocus={setFocusedRecipe} {...recipe} />
         ) : null;
       })}
     </div>
