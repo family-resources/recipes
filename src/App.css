@@ -72,6 +72,59 @@
   align-self: flex-end;
 }
 
+@media all {
+  .page_break {
+    display: none;
+  }
+}
+
+@media print {
+  html, body {
+    height: initial !important;
+    overflow: initial !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .page_break {
+    margin-top: 1rem;
+    display: block;
+    page-break-before: auto;
+  }
+
+  .ingreds_wrapper,
+  .instructions_wrapper {
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .making_it_section {
+    flex-direction: column;
+  }
+
+  .category_header,
+  .instruction_item,
+  .ingred_item {
+    font-size: 12px;
+  }
+
+  .recipe_container {
+    padding: 0;
+    margin: 0;
+  }
+
+  .recipe_photo_detail {
+    max-height: 10rem;
+  }
+
+  .button_row {
+    display: none;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 20mm;
+}
+
 .category_header {
   text-transform: uppercase;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -122,16 +175,6 @@
 
 .instructions_wrapper {
   flex: 3;
-}
-
-.print_only {
-  display: none;
-}
-
-@media print {
-  .print_only {
-      display: block;
-  }
 }
 
 .recipe_name {

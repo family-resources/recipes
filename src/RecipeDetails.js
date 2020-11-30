@@ -6,17 +6,19 @@ import { formatPhotoLink } from "./utils";
 
 const METADATA_PROPS = ["cooking_time", "preheat_temp", "servings", "source"];
 export function RecipeDetails(props) {
-  const { recipeId } = useParams();
   const { recipes } = props;
-  const currentRecipe = recipes.find((r) => r.id === recipeId);
-  const { name, person, ingreds, instructions, photos, story } = currentRecipe;
-
-  const photoUris = photos ? photos.split(", ") : [];
-
+  const { recipeId } = useParams();
   const printElRef = React.useRef();
   const handlePrint = useReactToPrint({
     content: () => printElRef.current,
   });
+
+  if (!recipes || recipes.length === 0) return null;
+
+  const currentRecipe = recipes.find((r) => r.id === recipeId);
+  const { name, person, ingreds, instructions, photos, story } = currentRecipe;
+
+  const photoUris = photos ? photos.split(", ") : [];
 
   return (
     <div ref={printElRef} className="recipe_container">
@@ -66,6 +68,7 @@ export function RecipeDetails(props) {
         </table>
         {story && <p className="recipe_story">{story}</p>}
       </div>
+      <div className="page_break" />
       <div className="making_it_section">
         <div className="ingreds_wrapper">
           <strong className="category_header">
@@ -77,9 +80,12 @@ export function RecipeDetails(props) {
                 .split("\n")
                 .filter((i) => i)
                 .map((i, index) => (
-                  <li className="ingred_item" key={`${index}${i}`}>
-                    {i}
-                  </li>
+                  <>
+                    <div className="page_break" />
+                    <li className="ingred_item" key={`${index}${i}`}>
+                      {i}
+                    </li>
+                  </>
                 ))}
           </ul>
         </div>
@@ -92,7 +98,14 @@ export function RecipeDetails(props) {
               instructions
                 .split("\n")
                 .filter((i) => i)
-                .map((i, index) => <p key={`${index}${i}`}>{i}</p>)}
+                .map((i, index) => (
+                  <>
+                    <div className="page_break" />
+                    <p className="instruction_item" key={`${index}${i}`}>
+                      {i}
+                    </p>
+                  </>
+                ))}
           </div>
         </div>
       </div>
