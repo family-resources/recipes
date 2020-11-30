@@ -1,20 +1,15 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { DISPLAY_NAMES_BY_KEY } from "./constants";
 import { formatPhotoLink } from "./utils";
 
 const METADATA_PROPS = ["cooking_time", "preheat_temp", "servings", "source"];
 export function RecipeDetails(props) {
-  const {
-    name,
-    person,
-    ingreds,
-    instructions,
-    photos,
-    story,
-    clearFocus,
-    id,
-  } = props;
+  const { recipeId } = useParams();
+  const { recipes } = props;
+  const currentRecipe = recipes.find((r) => r.id === recipeId);
+  const { name, person, ingreds, instructions, photos, story } = currentRecipe;
 
   const photoUris = photos ? photos.split(", ") : [];
 
@@ -26,9 +21,6 @@ export function RecipeDetails(props) {
   return (
     <div ref={printElRef} className="recipe_container">
       <div className="button_row">
-        <button className="back_button" onClick={clearFocus}>
-          &lt; Back
-        </button>
         <button
           onClick={handlePrint}
           title="print this recipe"
@@ -104,7 +96,6 @@ export function RecipeDetails(props) {
           </div>
         </div>
       </div>
-      <footer>{id}</footer>
     </div>
   );
 }

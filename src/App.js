@@ -1,21 +1,30 @@
 import * as React from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { Authentication } from "./Authentication";
+import { RecipeDetails } from "./RecipeDetails";
 import { Home } from "./Home";
-import { useScript } from "./useScript";
+import { NavBar } from "./NavBar";
 
 function App() {
-  const [gapiLoaded, gapiError] = useScript(
-    "https://apis.google.com/js/api.js"
-  );
   const [recipes, setRecipes] = React.useState(null);
 
   return (
-    <div className="app_container">
-      <Authentication loaded={gapiLoaded} setRecipes={setRecipes} />
-      {gapiError && <p>gapiError</p>}
-      {recipes && <Home recipes={recipes} />}
-    </div>
+    <HashRouter basename="/">
+      <div className="app_container">
+        <NavBar setRecipes={setRecipes} />
+        <Route exact path="/">
+          <Home recipes={recipes} />
+        </Route>
+        <Switch>
+          <Route exact path="/about">
+            <div>TODO: about page</div>
+          </Route>
+          <Route path="/:recipeId">
+            <RecipeDetails recipes={recipes} />
+          </Route>
+        </Switch>
+      </div>
+    </HashRouter>
   );
 }
 

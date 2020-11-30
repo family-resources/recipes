@@ -3,7 +3,7 @@ import { RecipeTile } from "./RecipeTile";
 import { getSearchStringForRecipe } from "./utils";
 
 export function RecipeGrid(props) {
-  const { recipes, filters, searchTerm, setFocusedRecipe } = props;
+  const { recipes, filters, searchTerm } = props;
 
   return (
     <div className="recipes_container">
@@ -17,7 +17,7 @@ export function RecipeGrid(props) {
             new RegExp(searchTerm, "i")
           ) >= 0;
         return passesFilters && passesSearch ? (
-          <RecipeTile key={recipe.id} setFocus={setFocusedRecipe} {...recipe} />
+          <RecipeTile key={recipe.id} {...recipe} />
         ) : null;
       })}
     </div>

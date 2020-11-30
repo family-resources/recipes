@@ -5,9 +5,27 @@
   color: #efefef;
 }
 
-.auth_container {
-  width: 100%;
+.main_nav {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.nav_link {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #efefef;
+  padding-bottom: 0.25rem;
+}
+
+.nav_link.active {
+  border-bottom: 2px solid #efefef;
+}
+
+.auth_container {
+  display: flex;
+  margin: 0 0 0 8rem ;
 }
 
 .auth_container.logged_in {
@@ -35,7 +53,7 @@
 
 .button_row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-self: stretch;
   margin-bottom: 0.5rem;
 }
@@ -139,7 +157,15 @@
   justify-content: space-between;
   background-color: #2d2d2d;
   margin: 0.5rem 0.25rem;
-  cursor: pointer;
+}
+
+.recipe_tile_anchor {
+  text-decoration: none;
+  color: #efefef;
+}
+
+.recipe_tile_anchor:visited {
+  color: #bebebe;
 }
 
 .recipe_tile_name {
