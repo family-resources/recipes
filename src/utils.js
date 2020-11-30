@@ -25,5 +25,9 @@ export function formatPhotoLink(raw_uri) {
     new RegExp(/(https:\/\/drive.google.com\/)(file\/d\/|open\?id=)([^/]*)/)
   );
 
-  return match && `${match[1]}uc?export=view&id=${match[3]}`;
+  if (!match) return null;
+
+  const path = match[1];
+  const id = match[3];
+  return `${path}uc?export=view&id=${id}`;
 }

@@ -80,12 +80,9 @@ export function RecipeDetails(props) {
                 .split("\n")
                 .filter((i) => i)
                 .map((i, index) => (
-                  <>
-                    <div className="page_break" />
-                    <li className="ingred_item" key={`${index}${i}`}>
-                      {i}
-                    </li>
-                  </>
+                  <li className="ingred_item" key={`${index}${i}`}>
+                    {i}
+                  </li>
                 ))}
           </ul>
         </div>
@@ -99,12 +96,9 @@ export function RecipeDetails(props) {
                 .split("\n")
                 .filter((i) => i)
                 .map((i, index) => (
-                  <>
-                    <div className="page_break" />
-                    <p className="instruction_item" key={`${index}${i}`}>
-                      {i}
-                    </p>
-                  </>
+                  <p className="instruction_item" key={`${index}${i}`}>
+                    {i}
+                  </p>
                 ))}
           </div>
         </div>
