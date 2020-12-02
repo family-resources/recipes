@@ -81,7 +81,7 @@ export function AddRecipe(props) {
         <div className="add_recipe_form_row">
           <ShortTextField
             label="recipe title"
-            placeholder="e.g. Pumpkin Bread"
+            placeholder="Pumpkin Bread..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "name", value })
             }
@@ -91,7 +91,7 @@ export function AddRecipe(props) {
           <ShortTextField
             name="person"
             label="your name"
-            placeholder="e.g. Suzanne Cooper"
+            placeholder="Suzanne Cooper..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "person", value })
             }
@@ -105,7 +105,7 @@ export function AddRecipe(props) {
           <LongTextField
             name="ingreds"
             label="ingredients list"
-            placeholder="one ingredient (including measurement) per line"
+            placeholder="one ingredient (including measurement) per line..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "ingreds", value })
             }
@@ -115,7 +115,7 @@ export function AddRecipe(props) {
           <LongTextField
             name="instructions"
             label="instructions"
-            placeholder="preparation step by step"
+            placeholder="preparation step by step..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "instructions", value })
             }
