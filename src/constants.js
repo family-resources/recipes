@@ -7,6 +7,13 @@ export const API_KEY =
 
 export const RECIPES_SHEET_ID = "1mlCIY1G-CW1EfNddv7tjEVJoXCz6TyXLcNfqLdBRkzU";
 
+export const FIELD_TYPE = {
+  SHORT_TEXT: "short_text",
+  LONG_TEXT: "long_text",
+  FILE_UPLOAD: "file_upload",
+  CAT_SELECT: "cat_select",
+};
+
 export const DISPLAY_NAMES_BY_KEY = {
   name: "name",
   person: "person",
@@ -20,6 +27,9 @@ export const DISPLAY_NAMES_BY_KEY = {
   preheat_temp: "preheat temperature",
   servings: "servings",
   photos: "photos",
+  timestamp: "when recipe was added",
+  alt_cat: "alternate category (if non-canonical)",
+  id: "unique identifier",
 };
 
 export const PLURAL_DISPLAY_NAMES_BY_KEY = {

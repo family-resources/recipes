@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import "./App.css";
 import { RecipeGrid } from "./RecipeGrid";
 import { SearchBar } from "./SearchBar";
@@ -17,6 +18,9 @@ export function Home(props) {
       <div className="controls_container">
         <SearchBar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
         <Filters recipes={recipes} setFilters={setFilters} filters={filters} />
+        <Link to="add" className="add_recipe_link">
+          + Add Recipe
+        </Link>
       </div>
       <RecipeGrid recipes={recipes} filters={filters} searchTerm={searchTerm} />
     </>

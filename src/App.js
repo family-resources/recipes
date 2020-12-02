@@ -2,6 +2,7 @@ import * as React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { RecipeDetails } from "./RecipeDetails";
+import { AddRecipe } from "./AddRecipe";
 import { Home } from "./Home";
 import { NavBar } from "./NavBar";
 
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route exact path="/about">
             <div>TODO: about page</div>
+          </Route>
+          <Route path="/add">
+            <AddRecipe recipes={recipes} />
           </Route>
           <Route path="/:recipeId">
             <RecipeDetails recipes={recipes} />
