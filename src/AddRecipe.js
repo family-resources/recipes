@@ -1,4 +1,11 @@
 import * as React from "react";
+import CreatableSelect from "react-select/creatable";
+
+import {
+  RECIPES_SHEET_ID,
+  RECIPES_SHEET_RANGE,
+  KEYS_IN_ORDER,
+} from "./constants";
 
 function ShortTextField(props) {
   return (
@@ -7,7 +14,7 @@ function ShortTextField(props) {
       className={`add_recipe_field_label ${props.name}`}
     >
       {props.label}
-      <input {...props}></input>
+      <input className="short_text_field" {...props}></input>
     </label>
   );
 }
@@ -29,7 +36,7 @@ function FileUploadField(props) {
       className={`add_recipe_field_label ${props.name}`}
     >
       {props.label}
-      <input {...props}></input>
+      <input className="file_upload_field" {...props}></input>
     </label>
   );
 }
@@ -40,7 +47,13 @@ function CategoryField(props) {
       className={`add_recipe_field_label ${props.name}`}
     >
       {props.label}
-      <input {...props}></input>
+      <CreatableSelect
+        isClearable
+        onChange={props.handleChange}
+        onInputChange={props.handleChange}
+        options={props.options}
+        className="category_field"
+      />
     </label>
   );
 }
@@ -65,6 +78,31 @@ export function AddRecipe(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formState);
+    const allFormState = {
+      ...formState,
+      timestamp: new Date(),
+      raw_recipe: "",
+      id: "", // spreadsheet macro handles id for now
+    };
+    const appendRowRequestBody = {
+      values: [KEYS_IN_ORDER.map((key) => allFormState[key])], // NOTE: must be 2d array
+    };
+    const request = global.gapi.client.sheets.spreadsheets.values.append(
+      {
+        spreadsheetId: RECIPES_SHEET_ID,
+        range: RECIPES_SHEET_RANGE,
+        valueInputOption: "USER_ENTERED",
+      },
+      appendRowRequestBody
+    );
+    request.then(
+      function (response) {
+        console.log(response.result);
+      },
+      function (reason) {
+        console.error("error: " + reason.result.error.message);
+      }
+    );
   };
   function formReducer(prevState, { key, value }) {
     return { ...prevState, [key]: value };
@@ -74,6 +112,15 @@ export function AddRecipe(props) {
     formReducer,
     INITIAL_FORM
   );
+
+  const categoryOptions = recipes
+    ? recipes.reduce((acc, r) => {
+        const { raw_cat } = r;
+        return acc.some((o) => o.value === raw_cat)
+          ? acc
+          : [...acc, { value: raw_cat, label: raw_cat }];
+      }, [])
+    : [];
 
   return (
     <div className="add_recipe_form_wrapper">
@@ -98,14 +145,23 @@ export function AddRecipe(props) {
             value={formState.person}
             required
           />
-          <CategoryField name="raw_cat" label="category" required />
+          <CategoryField
+            name="raw_cat"
+            label="category"
+            handleChange={(value) =>
+              dispatchFormUpdate({ key: "raw_cat", value })
+            }
+            value={formState.raw_cat}
+            options={categoryOptions}
+            required
+          />
         </div>
 
         <div className="add_recipe_form_row">
           <LongTextField
             name="ingreds"
             label="ingredients list"
-            placeholder="one ingredient (including measurement) per line..."
+            placeholder="One ingredient (w/ measurement) per line..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "ingreds", value })
             }
@@ -115,7 +171,7 @@ export function AddRecipe(props) {
           <LongTextField
             name="instructions"
             label="instructions"
-            placeholder="preparation step by step..."
+            placeholder="List preparation steps..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "instructions", value })
             }
@@ -126,7 +182,7 @@ export function AddRecipe(props) {
         <div className="add_recipe_form_row">
           <ShortTextField
             name="cooking_time"
-            label="total cooking time"
+            label="cooking time"
             placeholder="2 hours..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "cooking_time", value })
@@ -135,8 +191,8 @@ export function AddRecipe(props) {
           />
           <ShortTextField
             name="preheat_temp"
-            label="oven preheat temperature"
-            placeholder="350°F..."
+            label="oven temperature"
+            placeholder="if applicable..."
             onChange={({ target: { value } }) =>
               dispatchFormUpdate({ key: "preheat_temp", value })
             }
@@ -156,7 +212,7 @@ export function AddRecipe(props) {
         <LongTextField
           name="story"
           label="backstory"
-          placeholder="Does this recipe have special significance? If so, what's its story?"
+          placeholder="What is this recipe's backstory?"
           onChange={({ target: { value } }) =>
             dispatchFormUpdate({ key: "story", value })
           }
@@ -173,9 +229,11 @@ export function AddRecipe(props) {
             }
             value={formState.source}
           />
-          <FileUploadField name="photos" label="photos of this recipe" />
+          <FileUploadField name="photos" label="photos" />
         </div>
-        <button type="submit">SUBMIT RECIPE</button>
+        <button type="submit" className="add_recipe_submit_button">
+          SUBMIT RECIPE
+        </button>
       </form>
     </div>
   );

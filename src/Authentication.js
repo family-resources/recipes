@@ -1,5 +1,10 @@
 import * as React from "react";
-import { API_KEY, CLIENT_ID, RECIPES_SHEET_ID } from "./constants";
+import {
+  API_KEY,
+  CLIENT_ID,
+  RECIPES_SHEET_ID,
+  RECIPES_SHEET_RANGE,
+} from "./constants";
 
 export function Authentication({ loaded, setRecipes }): React.Node {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -12,7 +17,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
     global.gapi.client.sheets.spreadsheets.values
       .get({
         spreadsheetId: RECIPES_SHEET_ID,
-        range: "Recipes!A2:O",
+        range: RECIPES_SHEET_RANGE,
       })
       .then(
         (response) => {
@@ -85,7 +90,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
               discoveryDocs: [
                 "https://sheets.googleapis.com/$discovery/rest?version=v4",
               ],
-              scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
+              scope: "https://www.googleapis.com/auth/spreadsheets",
             })
             .then(
               function () {

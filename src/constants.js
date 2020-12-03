@@ -6,6 +6,7 @@ export const API_KEY =
   process.env.NODE_ENV === "production" ? PROD_KEY : DEV_KEY;
 
 export const RECIPES_SHEET_ID = "1mlCIY1G-CW1EfNddv7tjEVJoXCz6TyXLcNfqLdBRkzU";
+export const RECIPES_SHEET_RANGE = "Recipes!A2:O";
 
 export const FIELD_TYPE = {
   SHORT_TEXT: "short_text",
@@ -46,6 +47,24 @@ export const PLURAL_DISPLAY_NAMES_BY_KEY = {
   servings: "servings",
   photos: "photos",
 };
+
+export const KEYS_IN_ORDER = [
+  "timestamp",
+  "person",
+  "name",
+  "raw_cat",
+  "alt_cat",
+  "ingreds",
+  "instructions",
+  "story",
+  "source",
+  "cooking_time",
+  "servings",
+  "photos",
+  "preheat_temp",
+  "raw_recipe",
+  "id",
+];
 
 export const SEARCHABLE_KEYS = [
   "name",
