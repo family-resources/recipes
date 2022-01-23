@@ -58,10 +58,13 @@ export function RecipeDetails(props) {
           <tbody>
             {METADATA_PROPS.map((p) =>
               props[p] ? (
-                <tr key={p} className="metadata_item">
-                  <td className="metadata_key">{DISPLAY_NAMES_BY_KEY[p]}</td>
-                  <td>{props[p]}</td>
-                </tr>
+                <>
+                  <tr key={p} className="metadata_item">
+                    <td className="metadata_key">{DISPLAY_NAMES_BY_KEY[p]}</td>
+                    <td>{props[p]}</td>
+                  </tr>
+                  <tr className="page_break"></tr>
+                </>
               ) : null
             )}
           </tbody>
@@ -80,9 +83,12 @@ export function RecipeDetails(props) {
                 .split("\n")
                 .filter((i) => i)
                 .map((i, index) => (
-                  <li className="ingred_item" key={`${index}${i}`}>
-                    {i}
-                  </li>
+                  <>
+                    <li className="ingred_item" key={`${index}${i}`}>
+                      {i}
+                    </li>
+                    <div className="page_break" />
+                  </>
                 ))}
           </ul>
         </div>
@@ -96,9 +102,12 @@ export function RecipeDetails(props) {
                 .split("\n")
                 .filter((i) => i)
                 .map((i, index) => (
-                  <p className="instruction_item" key={`${index}${i}`}>
-                    {i}
-                  </p>
+                  <>
+                    <p className="instruction_item" key={`${index}${i}`}>
+                      {i}
+                    </p>
+                    <div className="page_break" />
+                  </>
                 ))}
           </div>
         </div>

@@ -90,7 +90,10 @@ export function Authentication({ loaded, setRecipes }): React.Node {
               discoveryDocs: [
                 "https://sheets.googleapis.com/$discovery/rest?version=v4",
               ],
-              scope: "https://www.googleapis.com/auth/spreadsheets",
+              scope: [
+                "https://www.googleapis.com/auth/drive",
+                "https://www.googleapis.com/auth/spreadsheets",
+              ],
             })
             .then(
               function () {
