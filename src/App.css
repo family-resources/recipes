@@ -23,6 +23,12 @@
   border-bottom: 2px solid #efefef;
 }
 
+.about_container {
+  display: flex;
+  flex-direction: column;
+  margin: 8rem;
+}
+
 .auth_container {
   display: flex;
   margin: 0 0 0 8rem ;
@@ -39,6 +45,8 @@
 .add_recipe_link {
   text-decoration: none;
   color: #efefef;
+  height: 1.5rem;
+  margin-left: 1rem;
 }
 
 .add_recipe_form_wrapper {
@@ -327,6 +335,7 @@
 .controls_container {
   padding: 1rem 20%;
   display: flex;
+  align-items: center;
 }
 
 .filters_container {
@@ -336,7 +345,13 @@
 }
 
 .filter_container {
-  margin: 0 1rem;
+  margin-left: 1rem;
+  height: 1.5rem;
+}
+
+.filter_container > select{
+  border: none;
+  height: 1.5rem;
 }
 
 .search_container {
@@ -349,6 +364,8 @@
 .search_container > input {
   width: 16rem;
   height: 1.5rem;
+  border: none;
+  padding: 0 0.5rem;
 }
 
 .search_container > input:focus {

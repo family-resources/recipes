@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import * as React from "react";
 import CreatableSelect from "react-select/creatable";
 
@@ -26,17 +27,6 @@ function LongTextField(props) {
     >
       {props.label}
       <textarea className="long_text_field" {...props}></textarea>
-    </label>
-  );
-}
-function FileUploadField(props) {
-  return (
-    <label
-      htmlFor={props.name}
-      className={`add_recipe_field_label ${props.name}`}
-    >
-      {props.label}
-      <input className="file_upload_field" {...props}></input>
     </label>
   );
 }
@@ -69,24 +59,37 @@ const INITIAL_FORM = {
   cooking_time: "",
   preheat_temp: "",
   servings: "",
-  photos: "",
 };
 
 export function AddRecipe(props) {
   const { recipes } = props;
+  const photoFileInputRef = React.useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formState);
+    console.log("PHOTO FILE ", photoFileInputRef.current.files[0]);
     const allFormState = {
       ...formState,
       timestamp: new Date(),
       raw_recipe: "",
-      id: "", // spreadsheet macro handles id for now
+      photos: "", // TODO: upload photos to drive first photoFileInputRef.current.files[0],
+      id: uuidv4(), // spreadsheet macro does not handle id when submitted via api
     };
     const appendRowRequestBody = {
       values: [KEYS_IN_ORDER.map((key) => allFormState[key])], // NOTE: must be 2d array
     };
+    // TODO: handle upload of photos
+    // if (allFormState.photos != null) {
+    //   const request = global.gapi.request({
+    //     path: "/upload/drive/v4/files",
+    //     method: "POST",
+    //     params: { uploadType: "multipart" },
+    //     headers: {
+    //       "Content-Type": 'multipart/mixed;',
+    //     },
+    //   });
+    // }
     const request = global.gapi.client.sheets.spreadsheets.values.append(
       {
         spreadsheetId: RECIPES_SHEET_ID,
@@ -229,7 +232,18 @@ export function AddRecipe(props) {
             }
             value={formState.source}
           />
-          <FileUploadField name="photos" label="photos" />
+          <label
+            htmlFor="photos"
+            className={`add_recipe_field_label ${props.name}`}
+          >
+            photos
+            <input
+              type="file"
+              className="file_upload_field"
+              name="photos"
+              ref={photoFileInputRef}
+            />
+          </label>
         </div>
         <button type="submit" className="add_recipe_submit_button">
           SUBMIT RECIPE

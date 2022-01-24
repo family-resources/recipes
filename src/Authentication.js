@@ -4,6 +4,7 @@ import {
   CLIENT_ID,
   RECIPES_SHEET_ID,
   RECIPES_SHEET_RANGE,
+  G_AUTH_SCOPES,
 } from "./constants";
 
 export function Authentication({ loaded, setRecipes }): React.Node {
@@ -90,10 +91,7 @@ export function Authentication({ loaded, setRecipes }): React.Node {
               discoveryDocs: [
                 "https://sheets.googleapis.com/$discovery/rest?version=v4",
               ],
-              scope: [
-                "https://www.googleapis.com/auth/drive",
-                "https://www.googleapis.com/auth/spreadsheets",
-              ],
+              scope: G_AUTH_SCOPES,
             })
             .then(
               function () {
@@ -117,6 +115,9 @@ export function Authentication({ loaded, setRecipes }): React.Node {
   }, [loaded, getRecipes]);
 
   function handleAuthClick(event) {
+    console.log(global.gapi);
+    console.log(global.gapi.auth2);
+    console.log(global.gapi.auth2.getAuthInstance());
     global.gapi.auth2.getAuthInstance().signIn();
   }
 

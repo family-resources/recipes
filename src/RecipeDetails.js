@@ -58,13 +58,13 @@ export function RecipeDetails(props) {
           <tbody>
             {METADATA_PROPS.map((p) =>
               props[p] ? (
-                <>
-                  <tr key={p} className="metadata_item">
+                <React.Fragment key={p}>
+                  <tr className="metadata_item">
                     <td className="metadata_key">{DISPLAY_NAMES_BY_KEY[p]}</td>
                     <td>{props[p]}</td>
                   </tr>
                   <tr className="page_break"></tr>
-                </>
+                </React.Fragment>
               ) : null
             )}
           </tbody>
@@ -83,12 +83,10 @@ export function RecipeDetails(props) {
                 .split("\n")
                 .filter((i) => i)
                 .map((i, index) => (
-                  <>
-                    <li className="ingred_item" key={`${index}${i}`}>
-                      {i}
-                    </li>
+                  <React.Fragment key={`${index}${i}`}>
+                    <li className="ingred_item">{i}</li>
                     <div className="page_break" />
-                  </>
+                  </React.Fragment>
                 ))}
           </ul>
         </div>
@@ -102,12 +100,10 @@ export function RecipeDetails(props) {
                 .split("\n")
                 .filter((i) => i)
                 .map((i, index) => (
-                  <>
-                    <p className="instruction_item" key={`${index}${i}`}>
-                      {i}
-                    </p>
+                  <React.Fragment key={`${index}${i}`}>
+                    <p className="instruction_item">{i}</p>
                     <div className="page_break" />
-                  </>
+                  </React.Fragment>
                 ))}
           </div>
         </div>

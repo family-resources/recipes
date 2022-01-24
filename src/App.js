@@ -5,6 +5,7 @@ import { RecipeDetails } from "./RecipeDetails";
 import { AddRecipe } from "./AddRecipe";
 import { Home } from "./Home";
 import { NavBar } from "./NavBar";
+import { About } from "./About";
 
 function App() {
   const [recipes, setRecipes] = React.useState(null);
@@ -18,7 +19,7 @@ function App() {
         </Route>
         <Switch>
           <Route exact path="/about">
-            <div>TODO: about page</div>
+            <About />
           </Route>
           <Route path="/add">
             <AddRecipe recipes={recipes} />

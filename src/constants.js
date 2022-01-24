@@ -5,6 +5,20 @@ const PROD_KEY = "AIzaSyArIxWcUVKS77HiW62vDeSPP7WDADJGSOQ";
 export const API_KEY =
   process.env.NODE_ENV === "production" ? PROD_KEY : DEV_KEY;
 
+const SCOPE_DRIVE = "https://www.googleapis.com/auth/drive";
+const SCOPE_DRIVE_FILE = "https://www.googleapis.com/auth/drive.file";
+const SCOPE_DRIVE_RO = " https://www.googleapis.com/auth/drive.readonly";
+const SCOPE_SPREADSHEETS = "https://www.googleapis.com/auth/spreadsheets";
+const SCOPE_SPREADSHEETS_RO =
+  "https://www.googleapis.com/auth/spreadsheets.readonly";
+export const G_AUTH_SCOPES = [
+  SCOPE_DRIVE,
+  SCOPE_DRIVE_FILE,
+  SCOPE_DRIVE_RO,
+  SCOPE_SPREADSHEETS,
+  SCOPE_SPREADSHEETS_RO,
+].join(" ");
+
 export const RECIPES_SHEET_ID = "1mlCIY1G-CW1EfNddv7tjEVJoXCz6TyXLcNfqLdBRkzU";
 export const RECIPES_SHEET_RANGE = "Recipes!A2:O";
 
